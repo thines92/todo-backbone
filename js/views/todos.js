@@ -16,7 +16,9 @@
 
     // The DOM events specific to an item.
     events: {
+      'click .toggle': 'toggleCompleted',
       'dblclick label': 'edit',
+      'click .destroy': 'clear',
       'keypress .edit': 'updateOnEnter',
       'blur .edit': 'close'
     },
@@ -34,6 +36,20 @@
       this.$input = this.$('.edit');
       return this;
     },
+
+    // Toggles visibility of the item.
+    toggleVisible: function() {
+      this.$el.toggleClass( 'hidden', this.isHidden());
+    },
+
+    // Determines if item should be hidden
+    isHidden: function() {
+      var isCompleted = this.model.get('completed');
+      return ( // hidden cases only
+        (!isCompleted && app.TodoFilter === 'completed')
+        || (isCompleted && app.TodoFilter === 'active')
+      );
+    }
 
     // Switch this view into `"editing"` mode, displaying the input field.
     edit: function() {
@@ -57,5 +73,11 @@
       if ( e.which === ENTER_KEY ) {
         this.close();
       }
+    },
+
+    // Remove the item, destroy the model from localStorage and delete its view.
+    clear: function() {
+      this.model.destroy();
     }
+    
   });

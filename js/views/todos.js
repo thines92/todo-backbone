@@ -28,11 +28,15 @@
     // app, we set a direct reference on the model for convenience.
     initialize: function() {
       this.listenTo(this.model, 'change', this.render);
+      this.listenTo(this.model, 'destroy', this.remove);
+      this.listenTo(this.model, 'visible', this.toggleVisible);
     },
 
     // Re-renders the titles of the todo item.
     render: function() {
       this.$el.html( this.template( this.model.attributes ) );
+      this.$el.toggleClass( 'completed', this.model.get('completed') );
+      this.toggleVisible();
       this.$input = this.$('.edit');
       return this;
     },
@@ -49,7 +53,12 @@
         (!isCompleted && app.TodoFilter === 'completed')
         || (isCompleted && app.TodoFilter === 'active')
       );
-    }
+    },
+
+    // Toggle the `"completed"` state of the model.
+    togglecompleted: function() {
+      this.model.toggle();
+    },
 
     // Switch this view into `"editing"` mode, displaying the input field.
     edit: function() {
@@ -79,5 +88,5 @@
     clear: function() {
       this.model.destroy();
     }
-    
+
   });

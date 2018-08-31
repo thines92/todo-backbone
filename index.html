@@ -7,37 +7,36 @@
   <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-  <section id="todoapp">
-    <header id="header">
+  <section class="todoapp">
+    <header class="header">
       <h1>todos</h1>
-      <input id="new-todo" placeholder="What needs to be done?" autofocus>
+      <input class="new-todo" placeholder="What needs to be done?" autofocus>
     </header>
-    <section id="main">
-      <input id="toggle-all" type="checkbox">
+    <section class="main">
+      <input class="toggle-all" id="toggle-all" type="checkbox">
       <label for="toggle-all">Mark all as complete</label>
-      <ul id="todo-list"></ul>
+      <ul class="todo-list"></ul>
     </section>
-    <footer id="footer"></footer>
+    <footer class="footer"></footer>
   </section>
-  <div id="info">
+  <footer class="info">
     <p>Double-click to edit a todo</p>
     <p>Written by <a href="https://github.com/addyosmani">Addy Osmani</a></p>
     <p>Part of <a href="http://todomvc.com">TodoMVC</a></p>
-  </div>
-
+  </footer>
   <script type="text/template" id="item-template">
     <div class="view">
-      <input type="checkbox" class="toggle" <%= completed? 'checked' : '' %>>
-      <label><%= title %></label>
+      <input class="toggle" type="checkbox" <%= completed ? 'checked' : '' %>>
+      <label><%- title %></label>
       <button class="destroy"></button>
     </div>
-    <input class="edit" value="<% title %>">
+    <input class="edit" value="<%- title %>">
   </script>
   <script type="text/template" id="stats-template">
-    <span id="todo-count"><strong><%= remaining %></strong> <%= remaining === 1 ? 'item' : 'items' %> left</span>
-    <ul id="filters">
+    <span class="todo-count"><strong><%= remaining %></strong> <%= remaining === 1 ? 'item' : 'items' %> left</span>
+    <ul class="filters">
       <li>
-        <a href="#/" class="selected">All</a>
+        <a class="selected" href="#/">All</a>
       </li>
       <li>
         <a href="#/active">Active</a>
@@ -47,10 +46,9 @@
       </li>
     </ul>
     <% if (completed) { %>
-      <button id="clear-completed">Clear completed (<%= completed %>)</button>
+    <button class="clear-completed">Clear completed</button>
     <% } %>
-  </script>
-  <script src="js/lib/jquery-3.3.1.min.js"></script>
+  </script>  <script src="js/lib/jquery-3.3.1.min.js"></script>
   <script src="js/lib/underscore.js"></script>
   <script src="js/lib/backbone.js"></script>
   <script src="js/lib/backbone.localStorage.js"></script>
